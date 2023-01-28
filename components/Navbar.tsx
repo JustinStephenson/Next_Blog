@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 type NavbarProps = {};
 
@@ -28,7 +27,7 @@ const Navbar = (props: NavbarProps) => {
 						{/* Link to profile page */}
 						<li>
 							<Link href={`/${username}`}>
-								<Image src={user?.photoURL} alt="photo-URL" />
+								<img src={user?.photoURL} alt="photo-URL" />
 							</Link>
 						</li>
 					</>
