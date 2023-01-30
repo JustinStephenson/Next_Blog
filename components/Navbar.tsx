@@ -28,7 +28,11 @@ const Navbar = (props: NavbarProps) => {
 						{/* Link to profile page */}
 						<li>
 							<Link href={`/${username}`}>
-								<img src={user?.photoURL} alt="photo-URL" />
+								<img
+									src={user?.photoURL}
+									alt="photo-URL"
+									referrerPolicy="no-referrer"
+								/>
 							</Link>
 						</li>
 					</>
