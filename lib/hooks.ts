@@ -8,7 +8,7 @@ export const useUserData = () => {
 
 	useEffect(() => {
 		// used to turn of realtime subscription
-		let unsubscribe: any;
+		let unsubscribe: () => void = () => {};
 
 		if (user) {
 			const ref = firestore.collection('users').doc(user.uid);
