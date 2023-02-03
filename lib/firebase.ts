@@ -25,6 +25,8 @@ export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 export const firestore = firebase.firestore();
 export const storage = firebase.storage();
 
+export const fromMillis = firebase.firestore.Timestamp.fromMillis;
+
 export const getUserWithUsername = async (username: string): Promise<any> => {
 	const usersRef = firestore.collection('users');
 	const query = usersRef.where('username', '==', username).limit(1);
