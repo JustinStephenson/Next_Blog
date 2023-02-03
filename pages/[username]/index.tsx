@@ -10,8 +10,15 @@ type Props = {
 // For server side rendering (SSR) in Next.js
 export async function getServerSideProps({ query }: any) {
 	const { username } = query;
-
 	const userDoc = await getUserWithUsername(username);
+
+	// If no user, short circuit to 404 page
+	// notFound: true, will tell Next.js to render a 404 page
+	if (!userDoc) {
+		return {
+			notFound: true,
+		};
+	}
 
 	// JSON serializable data
 	let user = null;
