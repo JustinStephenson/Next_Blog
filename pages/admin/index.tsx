@@ -1,11 +1,7 @@
-type Props = {};
+type AdminPostProps = {};
 
-const AdminPostsPage = (props: Props) => {
-	return (
-		<main>
-			<h1>Admin</h1>
-		</main>
-	);
+const AdminPostsPage = (props: AdminPostProps) => {
+	return <main></main>;
 };
 
 export default AdminPostsPage;
