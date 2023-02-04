@@ -65,10 +65,13 @@ const PostManager = () => {
 
 const PostForm = ({ defaultValues, postRef, preview }: any) => {
 	// useForm from react-hook-form
-	const { register, handleSubmit, reset, watch }: any = useForm({
+	const { register, handleSubmit, reset, watch, formState }: any = useForm({
 		defaultValues,
 		mode: 'onChange',
 	});
+
+	const { isValid, isDirty } = formState;
+	const { errors } = formState;
 
 	const updatePost = async ({ content, published }: any) => {
 		await postRef.update({
@@ -91,7 +94,18 @@ const PostForm = ({ defaultValues, postRef, preview }: any) => {
 			)}
 
 			<div className={preview ? styles.hidden : styles.controls}>
-				<textarea name="content" {...register('content')}></textarea>
+				<textarea
+					name="content"
+					{...register('content', {
+						maxLength: { value: 20000, message: 'content is too long' },
+						minLength: { value: 10, message: 'content is too short' },
+						required: { value: true, message: 'content is required' },
+					})}
+				></textarea>
+
+				{errors.content && (
+					<p className="text-danger">{errors.content.message}</p>
+				)}
 
 				<fieldset>
 					<input
@@ -103,7 +117,11 @@ const PostForm = ({ defaultValues, postRef, preview }: any) => {
 					<label>Published</label>
 				</fieldset>
 
-				<button type="submit" className="btn-green">
+				<button
+					type="submit"
+					className="btn-green"
+					disabled={!isDirty || !isValid}
+				>
 					Save Changes
 				</button>
 			</div>
