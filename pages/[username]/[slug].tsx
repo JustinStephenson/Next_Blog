@@ -1,5 +1,8 @@
+import AuthCheck from '@/components/AuthCheck';
+import HeartButton from '@/components/HeartButton';
 import PostContent from '@/components/PostContent';
 import { firestore, getUserWithUsername, postToJSON } from '@/lib/firebase';
+import Link from 'next/link';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 
 // This page is statically generated, BUT regenerated after new requests come in at an interval of 5000ms.
@@ -68,6 +71,16 @@ const PostPage = (props: PostProps) => {
 					<strong>{post.heartCount || 0} 🤍</strong>
 				</p>
 			</aside>
+
+			<AuthCheck
+				fallback={
+					<Link href="/enter">
+						<button>💗 Sign Up</button>
+					</Link>
+				}
+			>
+				<HeartButton postRef={postRef} />
+			</AuthCheck>
 		</main>
 	);
 };
